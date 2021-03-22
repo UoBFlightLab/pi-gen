@@ -3,15 +3,16 @@
 # install docker
 on_chroot - <<EOF
 echo "installing docker"
+cd "/home/${FIRST_USER_NAME}"
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh 
 usermod -aG docker ${FIRST_USER_NAME}
+rm get-docker.sh
 echo "installed docker"
 EOF
 
 # install Kubernetes
 on_chroot << EOF
 echo "downloading kubernetes binaries"
-cd "/home/${FIRST_USER_NAME}"
 curl -fsSL -O https://github.com/k3s-io/k3s/releases/download/v1.20.4%2Bk3s1/k3s-airgap-images-arm64.tar 
 curl -fsSL -O https://github.com/k3s-io/k3s/releases/download/v1.20.4%2Bk3s1/k3s-arm64 
 curl -fsSL https://get.k3s.io/ -o k3s_install.sh
