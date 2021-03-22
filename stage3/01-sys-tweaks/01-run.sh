@@ -26,11 +26,7 @@ cd "/lib/udev/rules.d"
 curl -fsSL -O https://raw.githubusercontent.com/CopterExpress/clover/11d5da5db227b3ba637c08ac47a5bde2d0e68f2a/clover/config/99-px4fmu.rules
 EOF
 
-
-if grep -q '${FIRST_USER_NAME} ALL=NOPASSWD: ALL' ${ROOTFS_DIR}/etc/sudoers; then
-    echo 'skip this step.'
-else
-    on_chroot << EOF
-echo '${FIRST_USER_NAME} ALL=NOPASSWD: ALL' | EDITOR='tee -a' visudo
+on_chroot <<EOF
+echo "No password sudo"
+sed "s/pi/$FIRST_USER_NAME/" -i /etc/sudoers.d/010_pi-nopasswd
 EOF
-fi
