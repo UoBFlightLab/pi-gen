@@ -12,6 +12,7 @@ EOF
 
 # install Kubernetes
 on_chroot << EOF
+cd "/home/${FIRST_USER_NAME}"
 echo "downloading kubernetes binaries"
 curl -fsSL -O https://github.com/k3s-io/k3s/releases/download/v1.20.4%2Bk3s1/k3s-airgap-images-arm64.tar 
 curl -fsSL -O https://github.com/k3s-io/k3s/releases/download/v1.20.4%2Bk3s1/k3s-arm64 
